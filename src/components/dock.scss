@@ -1,0 +1,192 @@
+// CSS Custom Properties
+:root {
+    --dock-bg:          rgba(255, 255, 255, 0.12);
+    --dock-border-top:  rgba(255, 255, 255, 0.35);
+    --dock-border:      rgba(255, 255, 255, 0.12);
+    --dock-shadow-deep: rgba(0, 0, 0, 0.50);
+    --dock-shadow-soft: rgba(0, 0, 0, 0.20);
+    --dock-radius:      1.1rem;
+    --icon-radius:      0.72rem;
+    --icon-size:        3.75rem;
+}
+
+// Wrapper — isolates blur so overflow icons don't get clipped 
+.dock-wrapper {
+    position: absolute;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    padding-top: 1.5rem;
+
+    // Blur lives here, completely separate from the content layer
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 1.5rem 0 0;
+        border-radius: var(--dock-radius);
+        backdrop-filter: blur(20px) saturate(120%) brightness(102%);
+        -webkit-backdrop-filter: blur(20px) saturate(120%) brightness(102%);
+        z-index: 0;
+    }
+}
+
+// Dock
+.dock {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: flex-end; // icons lift upward on hover
+    gap: 0.55rem;
+
+    padding-inline: 0.9rem;
+    padding-block: 0.7rem;
+    border-radius: var(--dock-radius);
+
+    background: var(--dock-bg);
+
+    border: 1px solid var(--dock-border);
+    border-top-color: var(--dock-border-top); // top-edge catches light
+
+    box-shadow:
+        0 0  0  0.5px rgba(0, 0, 0, 0.18),       // razor outline
+        0 6px 20px    var(--dock-shadow-soft),    // mid lift
+        0 20px 48px   var(--dock-shadow-deep),    // deep ground shadow
+        inset 0 1px 0 rgba(255, 255, 255, 0.28);  // inner glint
+
+    // Divider 
+    .dock-divider {
+        width: 1px;
+        align-self: stretch;
+        margin: 0.2rem 0.15rem;
+        background: linear-gradient(
+            to bottom,
+            transparent,
+            rgba(255, 255, 255, 0.25) 30%,
+            rgba(255, 255, 255, 0.25) 70%,
+            transparent
+        );
+    }
+
+    // Icon base
+    .icon {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: var(--icon-size);
+        aspect-ratio: 1 / 1;
+        border-radius: var(--icon-radius);
+
+        cursor: pointer;
+        will-change: transform;
+
+        // Crisp inner border for depth
+        box-shadow:
+            inset 0  1px 0   rgba(255, 255, 255, 0.30),
+            inset 0 -1px 0   rgba(0, 0, 0, 0.15),
+                  0  2px 6px rgba(0, 0, 0, 0.30);
+
+        transition:
+            transform  0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+            box-shadow 0.25s ease;
+
+        img, svg {
+            width: 62%;
+            height: 62%;
+            object-fit: contain;
+            pointer-events: none;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+        }
+
+        // Tooltip
+        &::before {
+            content: attr(data-label);
+            position: absolute;
+            top: -2.4rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+
+            font-family: -apple-system, "SF Pro Text", sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            white-space: nowrap;
+            color: rgba(255, 255, 255, 0.92);
+
+            background: rgba(30, 30, 30, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.2rem 0.55rem;
+            border-radius: 0.4rem;
+            backdrop-filter: blur(8px);
+
+            opacity: 0;
+            pointer-events: none;
+            transition:
+                opacity   0.15s ease,
+                transform 0.15s ease;
+        }
+
+       
+
+        // Hover state
+        &:hover {
+            transform: scale(1.28) translateY(-22%);
+            box-shadow:
+                inset 0  1px 0   rgba(255, 255, 255, 0.40),
+                inset 0 -1px 0   rgba(0, 0, 0, 0.10),
+                      0  8px 20px rgba(0, 0, 0, 0.45);
+
+            &::before {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        &:active {
+            transform: scale(1.1) translateY(-10%);
+            transition-duration: 0.1s;
+        }
+    }
+
+    // Neighbour magnification (CSS combinators) 
+    .icon:hover + .icon,
+    .icon:has(+ .icon:hover) {
+        transform: scale(1.13) translateY(-10%);
+    }
+
+    // Second-degree neighbour — subtle but present
+    .icon:hover + .icon + .icon,
+    .icon:has(+ .icon + .icon:hover) {
+        transform: scale(1.05) translateY(-4%);
+    }
+
+    // Icon color themes
+    .github,
+    .cli {
+        background: radial-gradient(circle at 35% 35%, #3a3a3a, #0d0d0d);
+    }
+
+    .note {
+        background: linear-gradient(145deg, #ffc85a, #ff9500);
+    }
+
+    .pdf {
+        background: linear-gradient(145deg, #ff5f6a, #ff1c30);
+    }
+
+    .calendar,
+    .mail {
+        background: linear-gradient(145deg, #7b6fff, #3d2dff);
+    }
+
+    .spotify {
+        background: linear-gradient(145deg, #5dde22, #1db954);
+    }
+
+    .link {
+        background: linear-gradient(145deg, #d070dc, #9c1aad);
+    }
+}
+

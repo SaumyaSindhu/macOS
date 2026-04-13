@@ -1,0 +1,169 @@
+nav {
+    position: relative;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 2rem;
+    padding: 0.32rem 0.85rem;
+    color: rgba(255, 255, 255, 0.96);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+    font-size: 0.81rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+    isolation: isolate;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: -2;
+    }
+
+    &::before {
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08)),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02) 32%, rgba(255, 255, 255, 0.08));
+        backdrop-filter: blur(22px) saturate(170%) brightness(1.08);
+        -webkit-backdrop-filter: blur(22px) saturate(170%) brightness(1.08);
+        box-shadow:
+            inset 0 -1px 0 rgba(255, 255, 255, 0.18),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    &::after {
+        z-index: -1;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.18), transparent 55%);
+        opacity: 0.8;
+    }
+
+    .left,
+    .right {
+        display: flex;
+        align-items: center;
+        min-width: 0;
+        gap: 0.18rem;
+    }
+
+    .left {
+        flex: 1 1 auto;
+    }
+
+    .right {
+        flex: 0 0 auto;
+        margin-left: 0.75rem;
+    }
+
+    .apple-icon,
+    .nav-item,
+    .nav-icon {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 1.45rem;
+        padding: 0.2rem 0.55rem;
+        border: 1px solid transparent;
+        border-radius: 0.45rem;
+        cursor: default;
+        user-select: none;
+        transition:
+            background-color 140ms ease,
+            border-color 140ms ease,
+            transform 140ms ease,
+            box-shadow 140ms ease,
+            opacity 140ms ease;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.16);
+            border-color: rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        &:active {
+            transform: translateY(1px);
+            background: rgba(255, 255, 255, 0.11);
+        }
+    }
+
+    .apple-icon {
+        margin-right: 0.2rem;
+        padding-inline: 0.48rem;
+
+        img {
+            width: 0.96rem;
+            height: 0.96rem;
+            object-fit: contain;
+            filter:
+                brightness(0)
+                invert(1)
+                drop-shadow(0 1px 0 rgba(0, 0, 0, 0.25));
+        }
+    }
+
+    .nav-icon {
+        padding-inline: 0.42rem;
+
+        img {
+            width: 0.94rem;
+            height: 0.94rem;
+            object-fit: contain;
+            filter:
+                brightness(0)
+                invert(1)
+                drop-shadow(0 1px 0 rgba(0, 0, 0, 0.25));
+        }
+    }
+
+    .nav-item {
+        white-space: nowrap;
+
+        p,
+        div {
+            line-height: 1;
+        }
+    }
+
+    .left .nav-item:first-of-type {
+        font-weight: 600;
+    }
+
+    .right .nav-item {
+        padding-inline: 0.6rem;
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    @media (max-width: 900px) {
+        padding-inline: 0.65rem;
+
+        .left .nav-item:nth-of-type(3),
+        .left .nav-item:nth-of-type(4) {
+            display: none;
+        }
+    }
+
+    @media (max-width: 640px) {
+        padding-inline: 0.45rem;
+
+        .left .nav-item:nth-of-type(2) {
+            display: none;
+        }
+
+        .nav-item,
+        .nav-icon,
+        .apple-icon {
+            padding-inline: 0.42rem;
+        }
+
+        .right .nav-item {
+            max-width: 12.5rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
