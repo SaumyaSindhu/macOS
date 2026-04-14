@@ -1,0 +1,92 @@
+// Mac Window 
+.window {
+    min-height: 500px;
+    min-width: 700px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: linear-gradient(160deg, #141414 0%, #0a0a0a 100%);
+    border-radius: 0.85rem;
+    overflow: hidden;
+
+    // Consistent with dock/nav — subtle border + shadow layering
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 0   0   0.5px rgba(0, 0, 0, 0.6),
+        0 8px 24px      rgba(0, 0, 0, 0.5),
+        0 32px 64px     rgba(0, 0, 0, 0.4),
+        inset 0 1px 0   rgba(255, 255, 255, 0.07); // top glint
+
+    color: rgba(210, 210, 210, 0.88);
+    font-family: -apple-system, "SF Pro Text", BlinkMacSystemFont, sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+
+    .nav {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding-inline: 0.85rem;
+        padding-block: 0.6rem;
+        flex-shrink: 0;
+
+        background: rgba(255, 255, 255, 0.03);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+ 
+        .dots {
+            position: absolute;
+            left: 0.85rem; 
+            display: flex;
+            gap: 0.45rem;
+
+            .dot {
+                height: 0.78rem;
+                width: 0.78rem;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: filter 0.15s ease;
+
+                &:hover { filter: brightness(1.2); }
+                &:active { filter: brightness(0.8); }
+            }
+
+            .red    { background: #ff5f57; box-shadow: 0 0 4px rgba(255, 95,  87,  0.5); }
+            .yellow { background: #ffbd2e; box-shadow: 0 0 4px rgba(255, 189, 46,  0.5); }
+            .green  { background: #28c840; box-shadow: 0 0 4px rgba(40,  200, 64,  0.5); }
+        }
+
+        .title p {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.45);
+            letter-spacing: 0.02em;
+            user-select: none;
+            margin: 0;
+        }
+    }
+
+    .main-content {
+        flex: 1;
+        padding: 0.85rem;
+        overflow: auto;
+
+        // scrollbar 
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 3px;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
+        }
+    }
+}
