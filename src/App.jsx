@@ -2,7 +2,7 @@ import React from 'react';
 import Dock from './components/Dock';
 import Nav from './components/Nav';
 import './app.scss';
-import MacWindow from './components/windows/MacWindow';
+import Github from './components/windows/Github';
 
 function App() {
 
@@ -11,7 +11,7 @@ function App() {
       <Nav />
       <Dock />
 
-      <MacWindow />
+      <Github />
     </main>
   )
 }
