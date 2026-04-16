@@ -24,14 +24,14 @@ const GitCard = ({ data={id: 1, image: "", title: "", description: "", tags: [],
 
 const Github = () => {
   return (
-    <MacWindow>
-         <div className="cards">
-            {githubData.map(project => {
-                return <GitCard data={project} />
-            })}
-         </div>
+    <MacWindow width="820px" height="580px" x={120} y={80}>
+      <div className="cards">
+        {githubData.map((project) => {
+          return <GitCard data={project} />;
+        })}
+      </div>
     </MacWindow>
-  )
+  );
 }
 
 export default Github
