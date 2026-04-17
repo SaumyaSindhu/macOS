@@ -2,7 +2,7 @@
 
 A polished React portfolio that recreates the feel of a macOS desktop and turns a personal site into an interactive product experience. Visitors can open draggable windows, preview projects, explore a terminal-style profile, view a resume, launch external links, and move through the portfolio like a mini operating system.
 
-https://github.com/user-attachments/assets/266f054d-54d8-464d-ad50-9fa52fa5d9bd
+https://github.com/user-attachments/assets/58240e24-67d1-48a6-bd2c-1e8498a7133a
 
 ## Why This Project Stands Out
 
