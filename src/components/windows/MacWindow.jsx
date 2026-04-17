@@ -8,13 +8,15 @@ const MacWindow = ({
   height = "520px",
   x = 100,
   y = 80,
+  windowName,
+  setWindowsState
 }) => {
   return (
     <Rnd default={{ width, height, x, y }} minWidth={400} minHeight={300}>
       <div className="window">
         <div className="nav">
           <div className="dots">
-            <div className="dot red"></div>
+            <div onClick={() => setWindowsState(state => ({...state, [windowName]: false}))} className="dot red"></div>
             <div className="dot yellow"></div>
             <div className="dot green"></div>
           </div>

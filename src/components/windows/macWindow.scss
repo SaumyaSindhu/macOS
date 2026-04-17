@@ -46,14 +46,13 @@
                 height: 0.78rem;
                 width: 0.78rem;
                 border-radius: 50%;
-                cursor: pointer;
                 transition: filter 0.15s ease;
 
                 &:hover { filter: brightness(1.2); }
                 &:active { filter: brightness(0.8); }
             }
 
-            .red    { background: #ff5f57; box-shadow: 0 0 4px rgba(255, 95,  87,  0.5); }
+            .red    { background: #ff5f57; cursor: pointer; box-shadow: 0 0 4px rgba(255, 95,  87,  0.5); }
             .yellow { background: #ffbd2e; box-shadow: 0 0 4px rgba(255, 189, 46,  0.5); }
             .green  { background: #28c840; box-shadow: 0 0 4px rgba(40,  200, 64,  0.5); }
         }
@@ -73,8 +72,7 @@
         overflow: auto;
         display: flex;
         flex-direction: column;
-
-        // scrollbar 
+ 
         &::-webkit-scrollbar {
             width: 6px;
         }
